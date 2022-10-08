@@ -15,16 +15,16 @@ class _PrincipalState extends State<Principal> {
   GlobalKey<FormState> formController = GlobalKey<FormState>();
   TextEditingController cepController = TextEditingController();
 
-  String retorno = "";
+  String cep = "";
   String rua = "Rua:";
   String complemento = "Complemento:";
   String bairro = "Bairro:";
   String cidade = "Cidade:";
   String estado = "Estado:";
+  String temperatura = "Temperatura: ";
 
   limpaTela() {
     setState(() {
-      retorno = "";
       cepController.text = "";
       formController = GlobalKey<FormState>();
     });
@@ -51,9 +51,8 @@ class _PrincipalState extends State<Principal> {
         'https://api.hgbrasil.com/weather?format=json-cors&key=c2b3048c&city_name=$cidade,$estado';
     Response resposta = await get(Uri.parse(url));
     Map tempo = json.decode(resposta.body);
-
     setState(() {
-      retorno = "Tempo: ${tempo['results']['temp']}";
+      temperatura = "Temperatura: ${tempo['results']['temp']} ºC";
     });
     print(tempo);
   }
@@ -71,7 +70,7 @@ class _PrincipalState extends State<Principal> {
               cepController, 'Informe o CEP'),
           Componentes()
               .criaBotao(formController, buscarEndereco, 'Pesquisar previsão'),
-          Componentes().criarContainerDados(retorno),
+          Componentes().criarContainerDados(temperatura, cidade, estado),
         ]),
       ),
     );

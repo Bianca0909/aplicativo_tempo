@@ -25,6 +25,13 @@ class Componentes {
     return Text(texto);
   }
 
+  criaTextoResposta(texto, cor, tamanho) {
+    return Text(
+      texto,
+      style: TextStyle(color: cor, fontSize: tamanho),
+    );
+  }
+
   iconeGrande() {
     return const Icon(
       Icons.sunny_snowing,
@@ -83,7 +90,7 @@ class Componentes {
     );
   }
 
-  criarContainerDados(resposta) {
+  criarContainerDados(temperatura, cidade, estado) {
     return Container(
       padding: const EdgeInsets.all(30),
       height: 250,
@@ -91,13 +98,24 @@ class Componentes {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color: Color.fromARGB(255, 21, 102, 88),
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(flex: 1, child: criaTexto(resposta, Colors.black)),
+            Expanded(
+              flex: 1,
+              child: criaTextoResposta(temperatura, Colors.black, 50),
+            ),
+            Expanded(
+              flex: 1,
+              child: criaTextoResposta(cidade, Colors.black, 50),
+            ),
+            Expanded(
+              flex: 1,
+              child: criaTextoResposta(estado, Colors.black, 50),
+            ),
           ],
         ),
       ),
